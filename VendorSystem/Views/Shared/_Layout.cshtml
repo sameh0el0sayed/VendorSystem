@@ -1,0 +1,952 @@
+﻿@using System.Globalization;
+@using System.Threading;
+@{
+    CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+    string Lang = currentCulture.Name;
+    if (Lang == "ar-SA")
+    {
+        <style>
+            .customSubMenu {
+                left: 25px !important;
+                font-size: 8px !important;
+            }
+
+            #DivButton button {
+                float: left;
+            }
+        </style>
+    }
+    else
+    {
+        <style>
+            .customSubMenu {
+                right: 25px !important;
+                font-size: 8px !important;
+            }
+
+            #DivButton button {
+                float: right;
+            }
+        </style>
+    }
+    string act = HttpContext.Current.Request.RequestContext.RouteData.Values["Action"].ToString();
+    string Controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    TempData["action"] = act;
+    TempData["Controller"] = Controller;
+}
+
+<style>
+    .alert-error {
+        background-color: #f70f0f !important;
+    }
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>@ViewBag.Title - @Session["CompanyName"]</title>
+    @{
+        VendorSystem.Models.Model1.BayanEntities _context = new VendorSystem.Models.Model1.BayanEntities();
+        var Vendor_CompanyID = Session["Vendor_CompanyID"] as string;
+        var Notifcation = _context.Notifcations.Where(w => w.Vendor_CompanyID == Vendor_CompanyID && w.Seen == false).OrderByDescending(c => c.ID).ToList();
+    }
+    @{var MainName = ViewBag.MainWarehouseName;
+        var UserName = ViewBag.UseName;
+    }
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="@Session["LogURL"]" />
+    @Styles.Render("~/Content/css")
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        .select2-container--default.select2-selection--single {
+            border-radius: 0 !important;
+        }
+
+        select + span {
+            width: 100% !important;
+        }
+
+        .input-group {
+            display: block !important;
+        }
+
+        .footer {
+            padding-top: 0px;
+            margin-top: 0px;
+        }
+
+        .sidebar:before {
+            display: none;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: lightgray;
+        }
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+        #Form {
+            color: #676767 !important;
+        }
+
+        .container {
+            color: #676767 !important;
+        }
+
+        .input-group {
+            border-color: #676767;
+        }
+
+        .modal-header, .modal-footer {
+            background-color: #676767 !important;
+            color: white !important;
+        }
+
+        .page-content {
+            margin-top: 0px !important;
+        }
+
+        .footer .footer-inner .footer-content {
+            position: absolute !important;
+            left: 0px !important;
+            right: 0px !important;
+            bottom: 4px !important;
+            padding: 8px !important;
+            line-height: 20px !important;
+            border-top: 0px !important;
+        }
+
+        .breadcrumbs-fixed {
+            background-color: white;
+            margin-left: 3px;
+            margin-right: 3px;
+            top: 40px;
+        }
+
+        table {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px !important;
+            text-align: center !important;
+            border-bottom: 1px solid #ddd !important;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5 !important;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2 !important;
+        }
+
+        th {
+            background-color: #676767 !important;
+            color: white !important;
+            border: 1px solid #676767 !important;
+        }
+
+            th:focus {
+                color: #676767 !important;
+                background-color: #676767 !important;
+            }
+
+        h2 {
+            color: #676767 !important;
+        }
+
+            h2 i {
+                color: #676767 !important;
+            }
+
+        #DivButton {
+            margin-top: 13px !important;
+        }
+
+            #DivButton button {
+                color: #F0BB41 !important;
+                border-color: #F0BB41 !important;
+                border-radius: 5px;
+            }
+
+                #DivButton button:hover, #DivButton button:focus, button:hover, button:focus {
+                    opacity: .9;
+                }
+
+            #DivButton a {
+                color: #F0BB41 !important;
+                border-color: #F0BB41 !important;
+                border-radius: 5px;
+            }
+
+                #DivButton a:hover, #DivButton a:focus {
+                    opacity: .1;
+                    border-color: #F0BB41 !important;
+                    background-color: white;
+                }
+
+        button {
+            color: #F0BB41 !important;
+            border-color: #df9237 !important;
+            border-radius: 5px !important;
+        }
+
+        #Insert, #BasicBtn, #FreeBtn, #GetProductAttr,
+        #HallOrderBtn, #Addbtn, #PrintInvoice {
+            color: white !important;
+            border-color: #df9237 !important;
+            border-radius: 5px !important;
+            background-color: #df9237 !important;
+            padding: 4px;
+        }
+
+        .btn-info, .btn-lg {
+            color: white !important;
+            border-color: #df9237 !important;
+            border-radius: 5px !important;
+            background-color: #df9237 !important;
+        }
+
+            .btn-info:hover, .btn-lg:hover {
+                color: white !important;
+                opacity: .9;
+                border-color: #df9237 !important;
+                background-color: #df9237 !important;
+            }
+
+            .btn-info.select2-container--default {
+                color: white !important;
+                opacity: .9;
+                border-color: #df9237 !important;
+                background-color: #df9237 !important;
+            }
+
+        button i, #PrintID i, #ExportToExcelID i {
+            color: #F0BB41 !important;
+        }
+
+        input[type=file] {
+            border-color: #F0BB41 !important;
+            background-color: #df9237 !important;
+            color: white;
+            border: 2px groove #df9237;
+            border-radius: 5px;
+        }
+
+            input[type=file]:focus {
+                border-color: #F0BB41 !important;
+                background-color: #df9237 !important;
+                color: white;
+                border: 2px groove #df9237;
+                border-radius: 5px;
+            }
+
+
+
+        #BtnSave, #CloseShowdataModel, #CloseModel, #Apply, #btnDone, #CloseModalSearchProducts, #Return,
+        #BtnInsertMainGroup, #InsertMainGroupCloseModel, #BtnInsertSubGroup, #InsertSubGroupCloseModel, #BtnInsertCategory,
+        #InsertCategoryCloseModel, #CloseShowSalesOrders, #BtnInserProduct, #InsertProductCloseModel {
+            border: none !important;
+            padding: 10px !important;
+        }
+    </style>
+</head>
+<body class="rtl" style="border-left: 3px groove #03b2e2;border-right: 3px groove #03b2e2;">
+
+    <div id="navbar" class="navbar navbar-default ace-save-state navbar-fixed-top row" style="background-color:#676767;margin-left:3px;margin-right:3px">
+        <div class="navbar-container ace-save-state" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar" style="background-color:#df9237">
+                <span class="sr-only">Toggle sidebar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header pull-left" style="padding:0px;margin:0px">
+                <a href="/Home/index" class="navbar-brand" style="padding:0px;margin:0px">
+                    <small>
+                        <img src="@Session["LogURL"]" style="width:110px; height:43px " />
+                    </small>
+                </a>
+            </div>
+            <div class="navbar-buttons navbar-header pull-left" role="navigation">
+                <ul class="nav ace-nav">
+
+                    <li class="purple dropdown-modal">
+                        <a data-toggle="dropdown" class="dropdown-toggle" id="languageLink" href="#" style="background-color:#df9237;height:43px">
+                            <font style="font-size:20px" id="language">@VendorSystem.Resources.Resource.Language</font>
+                        </a>
+                        <ul class="dropdown-menu-right dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                            </li>
+                            <li class="dropdown-content">
+                                <ul class="dropdown-menu dropdown-navbar navbar-blue">
+                                    @{
+                                        int x = 1;
+                                        foreach (var item in VendorSystem.SiteLanguage.AvailableLanguages)
+                                        {
+                                            <li>
+                                                <div class="clearfix">
+                                                    @if (x == 1)
+                                                    {
+                                                        <a href="/Admin/ChangeLanguage?lang=en" style="width:100%; height:100%">
+                                                            <span class="pull-right">
+                                                                <img src="~/Content/avatars/usa.png" style="width:20px;height:40px" />
+                                                                @item.LanguageFullName
+                                                            </span>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="/Admin/ChangeLanguage?lang=Ar" style="width:100%; height:100%">
+                                                            <span class="pull-right">
+                                                                <img src="~/Content/avatars/Egypt-Flag.png" style="width:20px;height:40px" />
+                                                                @item.LanguageFullName
+                                                            </span>
+                                                        </a>
+                                                    }
+                                                </div>
+                                            </li>
+                                            x++;
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="purple dropdown-modal" style="background-color:#df9237;height:43px">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="background-color:#df9237;height:43px">
+                            <i class="fa fa-bell icon-animated-bell" style="margin-top:15px"></i>
+                            @if (Notifcation.Where(c => c.Seen == false).Count() != 0)
+                            {
+                                <span class="badge badge-important" id="NotifcationCount">@Notifcation.Where(c => c.Seen == false).Count()</span>
+                            }
+
+                        </a>
+
+                        <ul class="dropdown-menu-left dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                <span> @Notifcation.Where(c => c.Seen == false).Count() @VendorSystem.Resources.Resource.Notifcations</span>
+                            </li>
+
+                            <li class="dropdown-content">
+                                <ul class="dropdown-menu dropdown-navbar navbar-blue">
+                                    @for (int i = 0; (i < 10 && i < Notifcation.Count); i++)
+                                    {
+                                        int SeenHelp = 0;
+                                        if (Notifcation.Count > 0 && Notifcation[i].Seen == true)
+                                        {
+                                            SeenHelp = 1;
+                                        }
+                                        <li id="@Notifcation[i].ID" value="@SeenHelp" onclick="UpdateNotifcation(this)">
+                                            <a href="@Notifcation[i].Url" target="_self">
+                                                <div class="clearfix">
+                                                    <span class="pull-left" style="text-align:center">
+                                                        @Notifcation[i].NotifcationMessage
+                                                    </span>
+                                                    @if (@Notifcation[i].Seen == false)
+                                                    {
+                                                        <span class="pull-right" style="color:green" id="@Notifcation[i].ID+circle"><i class="fa fa-circle"></i></span>
+                                                    }
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-footer">
+                                <a href="/Notifcation/index">
+                                    @VendorSystem.Resources.Resource.DisplayAllNotifcations
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="light-blue dropdown-modal" style="height:43px">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle" style="height:43px;background-color:#df9237">
+                            <img class="nav-user-photo" src="~/Content/avatars/user-laptop-512.png" alt="Jason's Photo" />
+                            @UserName
+                            <i class="ace-icon glyphicon glyphicon-chevron-down"></i>
+                        </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/Home/Logout">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    @VendorSystem.Resources.Resource.LogOut
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="main-container ace-save-state" id="main-container" style="padding-top:80px;background-color:white">
+
+        <script type="text/javascript">
+            try { ace.settings.loadState('main-container') } catch (e) { }
+        </script>
+
+        <div id="sidebar" class="sidebar responsive ace-save-state breadcrumbs-fixed"
+             style="border-left:2px;border-right:2px; border-top:0px;border-bottom:0px; border-style:groove; border-color:#03b2e2; overflow: auto;margin:0px !important;
+            height:90%;top:6px;overflow:auto;">
+            <script type="text/javascript">
+                try { ace.settings.loadState('sidebar') } catch (e) { }
+            </script>
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+            </div>
+
+            <!-- /.sidebar-shortcuts -->
+
+            <ul class="nav nav-list " style="color:#676767 !important;list-style-type:none">
+                @if (
+Authentication.IsVisiable("Products", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Product Code", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a class="accordion-toggle collapsed toggle-switch" style="color:#676767 !important;" data-toggle="collapse" href="#submenu-Products">
+                            <i class="menu-icon glyphicon glyphicon-plus"></i>
+                            <span class="menu-text">@VendorSystem.Resources.Resource.Products </span>
+                            <b class="arrow glyphicon glyphicon glyphicon-chevron-down"></b>
+                        </a>
+                        <ul id="submenu-Products" class="panel-collapse collapse panel-switch " role="menu" style="list-style-type:none">
+
+                            @if (Authentication.IsVisiable("Products", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/Product/Index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Products
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Product Code", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/ProductCode/Index" id="3">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.ProductCode
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                }
+                @if (
+Authentication.IsVisiable("Receive Purchase Order", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Shipped Purchase Order", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Delivered Purchase Order", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Rejected Purchase Order", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Rejected Purchase Order", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a class="accordion-toggle collapsed toggle-switch" style="color:#676767 !important;" data-toggle="collapse" href="#submenu-OrderManagement" onclick="DownloadTheOrders()">
+                            <i class="menu-icon glyphicon glyphicon-plus"></i>
+                            <span class="menu-text">@VendorSystem.Resources.Resource.OrderManagement </span>
+                            <b class="arrow glyphicon glyphicon glyphicon-chevron-down"></b>
+                        </a>
+                        <ul id="submenu-OrderManagement" class="panel-collapse collapse panel-switch " role="menu" style="list-style-type:none">
+                            @if (Authentication.IsVisiable("Receive Purchase Order", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/OrderManagement/Received" id="5">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Received
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Shipped Purchase Order", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/OrderManagement/Shipped" id="7">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Shipped
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Delivered Purchase Order", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/OrderManagement/Delivered" id="8">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Delivered
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Rejected Purchase Order", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/OrderManagement/Rejected" id="8">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Rejected
+                                    </a>
+                                </li>
+                            }
+                           
+                        </ul>
+                    </li>
+                }
+
+                @if (Authentication.IsVisiable("Allocation", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a href="/Allocation/index" id="9" style="color:#676767 !important">
+                            <i class="menu-icon glyphicon glyphicon-th-list" style="color:#676767 !important;padding:3px"></i>
+                            @VendorSystem.Resources.Resource.Allocation
+                        </a>
+                    </li>
+                }
+
+
+                @if (
+Authentication.IsVisiable("Replenishment", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Replenishment Report", TypeButton.Show, Session["RoleID"].ToString()) )
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a class="accordion-toggle collapsed toggle-switch" style="color:#676767 !important;" data-toggle="collapse" href="#submenu-ReplenishmentManagement" onclick="DownloadTheOrders()">
+                            <i class="menu-icon glyphicon glyphicon-plus"></i>
+                            <span class="menu-text">@VendorSystem.Resources.Resource.ReplenishmentManagement </span>
+                            <b class="arrow glyphicon glyphicon glyphicon-chevron-down"></b>
+                        </a>
+                        <ul id="submenu-ReplenishmentManagement" class="panel-collapse collapse panel-switch " role="menu" style="list-style-type:none">
+                            @if (Authentication.IsVisiable("Replenishment", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/Replenishment/Index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Replenishment
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Replenishment Report", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/ReplenishmentReport/Index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.ReplenishmentReport
+                                    </a>
+                                </li>
+                            }
+                           
+                        </ul>
+                    </li>
+                }
+
+                @if (
+Authentication.IsVisiable("Compensation", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Customers", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a class="accordion-toggle collapsed toggle-switch" style="color:#676767 !important;" data-toggle="collapse" href="#submenu-Compensation">
+                            <i class="menu-icon glyphicon glyphicon-plus"></i>
+                            <span class="menu-text">@VendorSystem.Resources.Resource.CustomersManagment </span>
+                            <b class="arrow glyphicon glyphicon glyphicon-chevron-down"></b>
+                        </a>
+                        <ul id="submenu-Compensation" class="panel-collapse collapse panel-switch " role="menu" style="list-style-type:none">
+                            @if (Authentication.IsVisiable("Compensation", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/Compensation/index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Compensation
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Compensation with growth percent", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/Compensation/CompensationGrowthPercent">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.CompensationGrowthPercent
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Customers", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="/Customers/index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Customers
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                    <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" style="color:#676767 !important" href="#submenu-Marketing">
+                        <i class="menu-icon glyphicon glyphicon-plus"></i>
+                        <span class="menu-text">@VendorSystem.Resources.Resource.Marketing </span>
+                        <b class="arrow glyphicon glyphicon glyphicon-chevron-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul id="submenu-Marketing" class="panel-collapse collapse panel-switch " role="menu" style="list-style-type:none">
+                        <li class="" style="padding-right:20px;margin:5px">
+                            <a href="">
+                                <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                @VendorSystem.Resources.Resource.Advertising
+                            </a>
+                        </li>
+                        <li class="" style="padding-right:20px;margin:5px">
+                            <a href="">
+                                <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                @VendorSystem.Resources.Resource.PromotionDiscounts
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                    <a href="" style="color:#676767 !important">
+                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                        @VendorSystem.Resources.Resource.AnalyticsDashboard
+                    </a>
+                </li>
+                @if (Authentication.IsVisiable("User", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a href="~/User/index">
+                            <i class="menu-icon glyphicon glyphicon-th-list" style="color:#676767 !important;padding:3px"></i>
+                            @VendorSystem.Resources.Resource.Users
+                        </a>
+                    </li>
+                }
+
+                @if (Authentication.IsVisiable("POsConfiguration", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a href="~/POsConfiguration/index">
+                            <i class="menu-icon glyphicon glyphicon-th-list" style="color:#676767 !important;padding:3px"></i>
+                            @VendorSystem.Resources.Resource.POsConfiguration
+                        </a>
+                    </li>
+                }
+                @if (Authentication.IsVisiable("Distributors", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a href="~/Distributors/index">
+                            <i class="menu-icon glyphicon glyphicon-th-list" style="color:#676767 !important;padding:3px"></i>
+                            @VendorSystem.Resources.Resource.Distributors
+                        </a>
+                    </li>
+                }
+                @if (Authentication.IsVisiable("Route", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a href="~/Routes/index">
+                            <i class="menu-icon glyphicon glyphicon-th-list" style="color:#676767 !important;padding:3px"></i>
+                            @VendorSystem.Resources.Resource.Route
+                        </a>
+                    </li>
+                }
+
+                @if (Authentication.IsVisiable("RouteCombination", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a href="~/RouteCombination/index">
+                            <i class="menu-icon glyphicon glyphicon-th-list" style="color:#676767 !important;padding:3px"></i>
+                            @VendorSystem.Resources.Resource.RouteCombination
+                        </a>
+                    </li>
+                }
+
+
+
+                @if (Authentication.IsVisiable("ReplenishmentConfiguration", TypeButton.Show, Session["RoleID"].ToString())
+                  || Authentication.IsVisiable("Order Configuration", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a class="accordion-toggle collapsed toggle-switch" style="color:#676767 !important;" data-toggle="collapse" href="#submenu-Settings">
+                            <i class="menu-icon glyphicon glyphicon-plus"></i>
+                            <span class="menu-text">@VendorSystem.Resources.Resource.ReplenishmentConfiguration </span>
+                            <b class="arrow glyphicon glyphicon glyphicon-chevron-down"></b>
+                        </a>
+                        <ul id="submenu-Settings" class="panel-collapse collapse panel-switch " role="menu" style="list-style-type:none">
+                            @if (Authentication.IsVisiable("ReplenishmentConfiguration", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/ReplenishmentConfiguration/Index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.ReplenishmentConfiguration
+                                    </a>
+                                </li>
+                            }
+
+                            @if (Authentication.IsVisiable("Order Configuration", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/OrderConfig/Index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.OrderConfiguration
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                }
+
+                @if (
+Authentication.IsVisiable("LockUp", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Company Settings", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Role", TypeButton.Show, Session["RoleID"].ToString())
+|| Authentication.IsVisiable("Assign Roles", TypeButton.Show, Session["RoleID"].ToString()))
+                {
+                    <li class="" style="color:#676767 !important;margin-left:3px;margin-right:3px">
+                        <a class="accordion-toggle collapsed toggle-switch" style="color:#676767 !important;" data-toggle="collapse" href="#submenu-Settings">
+                            <i class="menu-icon glyphicon glyphicon-plus"></i>
+                            <span class="menu-text">@VendorSystem.Resources.Resource.Settings </span>
+                            <b class="arrow glyphicon glyphicon glyphicon-chevron-down"></b>
+                        </a>
+                        <ul id="submenu-Settings" class="panel-collapse collapse panel-switch " role="menu" style="list-style-type:none">
+                            @if (Authentication.IsVisiable("LockUp", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/LockUp/Index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Refrences
+                                    </a>
+                                </li>
+                            }
+
+                            @if (Authentication.IsVisiable("Company Settings", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/Company/index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.CompanySetting
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Role", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/Role/index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.Role
+                                    </a>
+                                </li>
+                            }
+                            @if (Authentication.IsVisiable("Assign Roles", TypeButton.Show, Session["RoleID"].ToString()))
+                            {
+                                <li class="" style="padding-right:20px;margin:5px">
+                                    <a href="~/PagesVSRole/index">
+                                        <i class="menu-icon glyphicon glyphicon-th-list" style="padding:3px"></i>
+                                        @VendorSystem.Resources.Resource.AssignRoles
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul><!-- /.nav-list -->
+        </div>
+
+        <div class="main-content">
+            <div class="page-content" style="margin:30px 20px;">
+                <div class="ace-settings-container" id="ace-settings-container">
+                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" style="display:none" id="ace-settings-btn">
+                        <i class="ace-icon fa fa-cog bigger-130"></i>
+                    </div>
+                    <div class="ace-settings-box clearfix" id="ace-settings-box">
+                        <div class="pull-left width-50">
+                            <div class="ace-settings-item">
+                                <div class="pull-left">
+                                    <select id="skin-colorpicker" class="hide">
+                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
+                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                                    </select>
+                                </div>
+                                <span>&nbsp; Choose Skin</span>
+                            </div>
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
+                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+                            </div>
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
+                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+                            </div>
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
+                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+                            </div>
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" checked="checked" />
+                                <label class="lbl" for="ace-settings-rtl">  Left To Right (ltr)</label>
+                            </div>
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
+                                <label class="lbl" for="ace-settings-add-container">
+                                    Inside
+                                    <b>.container</b>
+                                </label>
+                            </div>
+                        </div><!-- /.pull-left -->
+                        <div class="pull-left width-50">
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
+                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+                            </div>
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
+                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+                            </div>
+                            <div class="ace-settings-item">
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
+                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+                            </div>
+                        </div><!-- /.pull-left -->
+                    </div><!-- /.ace-settings-box -->
+                </div><!-- /.ace-settings-container -->
+                @RenderBody()
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+
+        <div class="footer row">
+            <div class="footer-inner">
+                <div class="footer-content" style="background-color:#676767;margin-left:3px !important;margin-right:2px;margin-top:50px !important ">
+                    <div style="float:left; display:inline">
+                        <ul class="breadcrumb" style="display:inline-block;font-size:15px;">
+                            <li>
+                                <small style="color:white">@VendorSystem.Resources.Resource.ProvidedBy</small>
+                                <input id="UserCompanyID" value="Bisco" class="form-control" style="display:none">
+                                <img src="/images/byan.png" width="55" height="55" style="padding:0px">
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="float:right; display:inline;font-size:15px">
+                        <ul style="display:inline-block;list-style-type: none;margin-right:30px">
+                            <li style="margin-top:0px;height:10px">
+                                <a href="" style="text-decoration:underline;color:white">
+                                    @VendorSystem.Resources.Resource.ContactUs
+                                </a>
+                            </li>
+                            <li style="margin-top:7px;height:10px">
+                                <small style="color:#df9237">+2 01099603009</small>
+                            </li>
+                            <li style="margin-top:5px;height:10px">
+                                <small style="color:#df9237">info@elmrkt.com</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon glyphicon glyphicon-chevron-up icon-only bigger-110"></i>
+        </a>
+
+        <div class="loader" style="display:none">
+            <img src="~/Content/images/Loader10.gif" style="padding-top: 20%;" />
+        </div>
+    </div>
+</body>
+</html>
+
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+<script src="~/Scripts/ace-extra.min.js"></script>
+@Scripts.Render("~/bundles/modernizr")
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if ($("#language").html() == "اللغة") {
+            $('select').select2({ dir: "rtl" });
+            $("#DivButton").css('float', 'left')
+        }
+        else {
+            $('select').select2();
+            $("#DivButton").css('float', 'right')
+            $("#ace-settings-rtl").click();
+            document.getElementById("ace-settings-rtl").checked = true;
+        }
+        //to make side bar open as the last time befor load the new page
+        var elementID = Number(sessionStorage.getItem("elementID"));
+        var element = $("#" + elementID)[0];
+        var parent;
+        while (element != undefined && element != null) {
+
+            //to stop loop from going to top of side bar because this causes an issues in side bar
+            if (element.classList == "nav nav-list")
+                break;
+
+            // this class to make the display as block
+            $(element).addClass("ShowMyLi");
+
+            //get the parent of the current element
+            parent = element.parentElement;
+            element = parent;
+        }
+        sessionStorage.setItem("elementID", 0);
+
+    })
+
+    function UpdateNotifcation(Element) {
+        _ID = Element.id;
+
+        $.ajax({
+            url: "/Notifcation/ChangeNotifcation",
+            type: "POST",
+            data: { ID: _ID },
+            success: function (data) {
+            },
+            error: function (data) { }
+        })
+    }
+    var IsCollaps = 1;
+    function Collapse(element) {
+        debugger;
+        if (IsCollaps == 0) {
+            $(this + '.menu-icon').addClass('menu-icon glyphicon glyphicon-plus')
+            IsCollaps = 1;
+        }
+        else {
+            $(this + '.menu-icon').addClass('menu-icon glyphicon glyphicon-minus')
+            IsCollaps = 0;
+        }
+    }
+
+    function DownloadTheOrders() {
+        $.ajax({
+            url: "/Home/DownloadTheOrders",
+            success: function (data) {
+            },
+            error: function (data) { }
+        })
+    }
+</script>
+
+
+

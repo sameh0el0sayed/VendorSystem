@@ -1,0 +1,363 @@
+﻿@{
+    ViewBag.Title = VendorSystem.Resources.Resource.ReplenishmentConfiguration;
+}
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+        min-height: 32px;
+    }
+
+
+    .Dropdown {
+        height: 50px !important;
+        line-height: 40px !important;
+        margin: 10px 0px;
+    }
+</style>
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="glyphicon glyphicon-inbox" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.ReplenishmentConfiguration</h2>
+        <div id="DivButton" style="display:inline-block;">
+
+            <button type="button" onclick="window.location.reload()" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                @VendorSystem.Resources.Resource.New
+            </button>
+
+            @if (Authentication.IsVisiable("ReplenishmentConfiguration", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="CheckValidation()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-floppy-saved bigger-120 "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+            @if (Authentication.IsVisiable("ReplenishmentConfiguration", TypeButton.Search, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="Search()"  class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon  glyphicon-search "></i>
+                    @VendorSystem.Resources.Resource.Search
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<br/><br /><br />
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-xs-12" style="padding:0px; margin:0px">
+
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Name</label>
+                    <span class="span">*</span>
+                    <div class="input-group">
+                        <input type="text" id="txtName" class="form-control input" />
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.NameEng</label>
+                    <span class="span">*</span>
+                    <div class="input-group">
+                        <input type="text" id="txtNameEng" class="form-control input" />
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.CalculationType</label>
+                    <span class="span">*</span>
+                    <div class="input-group">
+                        @Html.DropDownList("ddCalculationTypeID", ViewBag.CalcType as SelectList)
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.ReplenishmentScheduleType</label>
+                    <div class="input-group">
+                        @Html.DropDownList("ddReplenishmentScheduleType", ViewBag.ScheduleType as SelectList)
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12" id="divRep_Weekly" style="display:none">
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.SelectTheDay</label>
+                        <div class="input-group">
+                            @Html.DropDownList("ddRep_Days_Weekly", ViewBag.WeekDays as SelectList, new { @class = "Dropdown" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.Add</label>
+                        <div class="input-group">
+                            <button type="button" style="padding:8px 30px" class="btn btn-white btn-info btn-bold" onclick="InsertInto_tblData_Rep_Weekly()">
+                                <i class="ace-icon glyphicon glyphicon-save bigger-120"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-xs-12">
+                        <table id="tblData_Rep_Weekly" class="table table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>DayNumber</th>
+                                    <th>@VendorSystem.Resources.Resource.Day</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12" id="divRep_Monthly" style="display:none">
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.SelectTheOrder</label>
+                        <div class="input-group">
+                            <select id="ddRep_WeekNumber_Monthly" style="height:50px !important; line-height: 40px !important; margin:10px 0px">
+                                <option value="1"> @VendorSystem.Resources.Resource.First </option>
+                                <option value="2"> @VendorSystem.Resources.Resource.Second </option>
+                                <option value="3"> @VendorSystem.Resources.Resource.Third </option>
+                                <option value="4"> @VendorSystem.Resources.Resource.Fourth </option>
+                                <option value="5"> @VendorSystem.Resources.Resource.Last </option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.SelectTheDay</label>
+                        <div class="input-group">
+                            @Html.DropDownList("ddRep_Days_Monthly", ViewBag.WeekDays as SelectList, new { @class = "Dropdown" })
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.Add</label>
+                        <div class="input-group">
+                            <button type="button" style="padding:8px 30px" class="btn btn-white btn-info btn-bold" onclick="InsertInto_tblData_Rep_Monthly()">
+                                <i class="ace-icon glyphicon glyphicon-save bigger-120"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12">
+                        <table id="tblData_Rep_Monthly" class="table table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>WeekNumber</th>
+                                    <th>DayNumber</th>
+                                    <th>@VendorSystem.Resources.Resource.TheOrder</th>
+                                    <th>@VendorSystem.Resources.Resource.Day</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <label>@VendorSystem.Resources.Resource.Active</label>
+                    <div class="input-group">
+                        <input id="Active" style="width:100%" class='ace ace-switch ace-switch-2 check' type='checkbox' checked />
+                        <span class='lbl'></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <label>@VendorSystem.Resources.Resource.IsIncludeMinQty</label>
+                    <div class="input-group">
+                        <input id="IsIncludeMinQty" style="width:100%" class='ace ace-switch ace-switch-2 check' type='checkbox' checked />
+                        <span class='lbl'></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.FirstClassification</label>
+                    <span class="span">*</span>
+                    <div class="input-group">
+                        @Html.DropDownList("ddFirstClass", ViewBag.FirstClassification as SelectList, new { @class = "Height" })
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.SecondClassification</label>
+                    <div class="input-group">
+                        <select id="ddSecondClass"></select>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.ThirdCalssification</label>
+                    <div class="input-group">
+                        <select id="ddThirdClass"></select>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.FourthCalssification</label>
+                    <div class="input-group">
+                        <select id="ddFourthClass"></select>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="col-lg-4 col-md-4 col-xs-12">
+
+                <div class="col-lg-9 col-md-9 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.VisitScheduleType</label>
+                    <div class="input-group">
+                        @Html.DropDownList("ddVisitScheduleType", ViewBag.ScheduleType as SelectList, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12" id="divPercentage" style="display:none">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Percentage</label>
+                    <div class="input-group">
+                        <input type="number" value="1" min="1" id="txtPercentage" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12" id="divVisit_Weekly" style="display:none">
+                    <div class="col-lg-9 col-md-9 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.SelectTheDay</label>
+                        <div class="input-group">
+                            @Html.DropDownList("ddVisit_Days_Weekly", ViewBag.WeekDays as SelectList, new { @class = "Dropdown" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.Add</label>
+                        <div class="input-group">
+                            <button type="button" style="padding:8px 30px; width:100%" class="btn btn-white btn-info btn-bold" onclick="InsertInto_tblData_Visit_Weekly()">
+                                <i class="ace-icon glyphicon glyphicon-save bigger-120"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-xs-12">
+                        <table id="tblData_Visit_Weekly" class="table table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>DayNumber</th>
+                                    <th>@VendorSystem.Resources.Resource.Day</th>
+                                    <th>@VendorSystem.Resources.Resource.Percentage</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12" id="divVisit_Monthly" style="display:none">
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.SelectTheOrder</label>
+                        <div class="input-group">
+                            <select id="ddVisit_WeekNumber_Monthly" style="height:50px !important; line-height: 40px !important; margin:10px 0px">
+                                <option value="1"> @VendorSystem.Resources.Resource.First </option>
+                                <option value="2"> @VendorSystem.Resources.Resource.Second </option>
+                                <option value="3"> @VendorSystem.Resources.Resource.Third </option>
+                                <option value="4"> @VendorSystem.Resources.Resource.Fourth </option>
+                                <option value="5"> @VendorSystem.Resources.Resource.Last </option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.SelectTheDay</label>
+                        <div class="input-group">
+                            @Html.DropDownList("ddVisit_Days_Monthly", ViewBag.WeekDays as SelectList, new { @class = "Dropdown" })
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <label class="control-label">@VendorSystem.Resources.Resource.Add</label>
+                        <div class="input-group">
+                            <button type="button" style="padding:8px 30px" class="btn btn-white btn-info btn-bold" onclick="InsertInto_tblData_Visit_Monthly()">
+                                <i class="ace-icon glyphicon glyphicon-save bigger-120"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12">
+                        <table id="tblData_Visit_Monthly" class="table table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>WeekNumber</th>
+                                    <th>DayNumber</th>
+                                    <th>@VendorSystem.Resources.Resource.TheOrder</th>
+                                    <th>@VendorSystem.Resources.Resource.Day</th>
+                                    <th>@VendorSystem.Resources.Resource.Percentage</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>*@
+
+        </div>
+    </div>
+</div>
+
+<div id="ModalShowPOsConfigurationsData" class="modal fade" POsConfiguration="dialog">
+    <div class="modal-dialog" style="width: 90%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" id="Xbtn" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <table id="tblShowPOsConfigurationsData" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@VendorSystem.Resources.Resource.Name</th>
+                                    <th>@VendorSystem.Resources.Resource.Status</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseModalShowPOsConfigurationsData">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirm" class="modal fade" POsConfiguration="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirm">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/ScriptsViews/ReplenishmentConfigurationJS.js?v2"></script>
+}
+

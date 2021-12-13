@@ -1,0 +1,410 @@
+﻿@model VendorSystem.Models.Model1.LockUp
+@{
+    ViewBag.Title = VendorSystem.Resources.Resource.Refrences;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+@*<link href="~/Content/Jstree.css" rel="stylesheet" />*@
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white;margin-top:13px">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="glyphicon glyphicon-home" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.Refrences</h2>
+        <div id="DivButton" style="display:inline-block;">
+
+            @if (Authentication.IsVisiable("LockUp", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+
+                <button type="button" onclick="EditeReference();" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-edit "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+            @if (Authentication.IsVisiable("LockUp", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="SaveNew();" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-saved "></i>
+                    @VendorSystem.Resources.Resource.CreateNode
+                </button>
+            }
+
+            @if (Authentication.IsVisiable("LockUp", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="Remove()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-remove "></i>
+                    @VendorSystem.Resources.Resource.Delete
+                </button>
+            }
+
+            @*@if (Authentication.IsVisiable("LockUp", TypeButton.Search, Session["RoleName"].ToString(), Session["CompanyID"].ToString()))
+                {
+                    <button type="button" id="clear" class="btn btn-white btn-info btn-bold">
+                        <i class="ace-icon glyphicon  glyphicon-search "></i>
+                        @VendorSystem.Resources.Resource.Clear
+                    </button>
+                }*@
+        </div>
+    </div>
+</div>
+<br /><br /><br /> <br /><br /><br />
+<div class="col-xs-12" style="color:#676767!important;font-weight:bold;">
+    <div class="row">
+
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="widget-box widget-color-blue2">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter smaller">@VendorSystem.Resources.Resource.Refrences</h4>
+                </div>
+                <div id="jstree" class="widget-body">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-2 col-md-2 col-xs-12">
+            <label class="control-label">@VendorSystem.Resources.Resource.MainReference</label>
+            <span class="span">*</span>
+            <div class="input-group">
+                @Html.DropDownList("ddMainReference", ViewBag.AllRefrences as SelectList, VendorSystem.Resources.Resource.Select)
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-xs-12">
+            <label class="control-label">@VendorSystem.Resources.Resource.RefrenceArName</label>
+            <span class="span">*</span>
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @maxlength = "20" })
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-xs-12">
+            <label class="control-label">@VendorSystem.Resources.Resource.RefrenceEnName</label>
+            <span class="span">*</span>
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.NameEng, new { @class = "form-control", @maxlength = "20" })
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-xs-12">
+            <label>@VendorSystem.Resources.Resource.Active</label>
+            <div class="input-group">
+                <input id="Active" class='ace ace-switch ace-switch-2 check' type='checkbox' checked />
+                <span class='lbl'></span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div id="ModalConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" name="action:Save" @*type="submit"*@ type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModel">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirmDelete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.DeleteQuestion</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.DeleteQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnDelete" name="action:Save" @*type="submit"*@ type="button" onclick="DeleteReference()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModel">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "LockUp", FormMethod.Post))
+{
+    <input type="hidden" name="selectedItems" id="selectedItems" />
+    <input type="submit" value="Submit" style="display:none" />
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    <script>
+        var selectedItem = [];
+        var OriginalNodeName;
+        let _IsEdit = false;
+        let ParentID = "";
+
+        $(function () {
+
+            if ($("#language").html().trim() == "اللغة") {
+                document.getElementById("jstree").style.direction = "rtl";
+            }
+            else {
+                document.getElementById("jstree").style.direction = "ltr";
+            }
+
+            $('#jstree').on('changed.jstree', function (e, data) {
+                var i, j;
+                var IsEdit = false;
+
+                if ($('#IsEdit').is(':checked'))
+                    IsEdit = true;
+                selectedItem = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    //Fetch the Id.
+                    var id = data.selected[i];
+                    //Remove the ParentId.
+                    if (id.indexOf('-') != -1) {
+                        id = id.split("-")[1];
+                    }
+                    //Add the Node to the JSON Array.
+                    selectedItem.push({
+                        text: data.instance.get_node(data.selected[i]).text,
+                        textEn: data.instance.get_node(data.selected[i]).textEn,
+                        id: id,
+                        parent: data.node.parents[0],//parent
+                        IsEdit: IsEdit
+                    });
+                }
+
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    async: true,
+                    datatype: 'json',
+                    contenttype: 'application/json; charset=utf-8',
+                    url: '/LockUp/GetLockUp',
+                    data: { id: selectedItem[0].id },
+                    success: function (data) {
+                        ID = selectedItem[0].id;
+                        var button = document.getElementById('btn-scroll-up');
+                        button.click();
+                        $('#Name').val(data.text);
+                        $('#NameEng').val(data.textEn);
+                        $("#ddMainReference").val(data.parent).change();
+                        $("#Active").prop('checked', data.Active);
+                        ParentID = data.parent;
+
+                    },
+                    error: function (data) {
+                        alert('error');
+                    }
+                });
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItem').val(JSON.stringify(selectedItem));
+            }).jstree({
+                "plugins": ["themes", "json_data", "search"],
+                "core": {
+                    "multiple": false, "themes": { "variant": "large" }, "data": JSON.parse('@Html.Raw(Json.Encode(ViewBag.Json))') @*@Html.Raw(ViewBag.Json)*@
+                },
+                /* "search" : { "case_insensitive" : true, "data" : function (str) {
+                    return {
+                        "operation" : "search",
+                        "search_str" : str
+                    };
+                }  },*/
+                "search": {
+                    show_only_matches: true,
+                    search_callback: function (searchString, node) {
+                        OriginalNodeName = node.text;
+                        node.text = node.text.toUpperCase();
+                        searchString = searchString.toUpperCase();
+                        if ((node.text.includes(searchString) == true || node.original.textEn.includes(searchString) == true) && node.parent == $("#References").val()) {
+                            node.text = OriginalNodeName;
+                            return node;
+                        }
+                        node.text = OriginalNodeName;
+                    }
+                },
+                "checkbox": { "keep_selected_style": false }
+            });//, "plugins": ["checkbox"],
+
+            $("#search").click(function () {
+                $("#jstree").jstree("search", $("#SearchTxt").val(), $(this).attr("rel"));
+                New();
+            });
+            $("#clear").click(function () { $("#jstree").jstree("clear_search"); });
+
+        });
+
+
+
+        function New() {
+            $('#Name').val("");
+            $('#NameEng').val("");
+            $('#SearchTxt').val("");
+            $("#References").val("").change();
+            selectedItem[0].id = -1;
+            $("#ddMainReference").val().change();
+            ParentID = "";
+            _IsEdit = false;
+        }
+
+        function EditeReference() {
+            _IsEdit = true;
+            CheckValidation();
+        }
+        function CheckValidation() {
+
+            if (_IsEdit == true && ParentID == "") {
+                if ($("#language").html() == "اللغة") { AlertNotify("danger", "عفوا لا يمكن التعديل على هذا المرجع  "); }
+                else { AlertNotify("danger", "Sorry, you couldn't edit on this reference!"); }
+                return false;
+            }
+
+            if (selectedItem[0] === undefined || $("#ddMainReference").val() == "") {
+                if ($("#language").html().trim() == "اللغة") { AlertNotify("danger", "عفوا لابد من اختيارالمرجع الاساسي "); }
+                else { AlertNotify("danger", "You must choose basic Reference"); }
+                return false;
+            }
+
+
+            if ($("#Name").val().trim() == "" || $("#NameEng").val().trim() == "") {
+                if ($("#language").html() == "اللغة") { AlertNotify("danger", "عفوا لابد من ادخال اسم المرجع "); }
+                else { AlertNotify("danger", "Sorry, You must enter Reference name!"); }
+                return false;
+            }
+
+
+            $("#ModalConfirm").modal();
+        }
+
+        function SaveNew() {
+            _IsEdit = false;
+            CheckValidation();
+        }
+
+        function Save() {
+            var selectedItems;
+            selectedItems = {
+                text: $('#Name').val(),// data.instance.get_node(data.selected[i]).text,
+                textEn: $('#NameEng').val(),// data.instance.get_node(data.selected[i]).text,
+                id: selectedItem[0].id,
+                parent: $("#ddMainReference").val(),// data.node.parents[0],//parent
+                Active: $("#Active").prop('checked'),
+                IsEdit: _IsEdit
+            };
+            var data = { selectedItems};
+            showloader();
+
+            $.ajax({
+                    type: "POST",
+                cache: false,
+                async: true,
+                datatype: 'json',
+                contenttype: 'application/json; charset=utf-8',
+                url: '/LockUp/Save',
+                data: data,
+                success: function (data) {
+                    $("#CloseModel").click();
+
+                    if (data == "Done") {
+                        if ($("#language").html() == "اللغة") {
+                            AlertNotify("success", "تم الحفظ بنجاح");
+                        }
+                        else {
+                            AlertNotify("success", "Saved Successfully");
+                        }
+                        setTimeout(function () { location.reload(); }, 1500)
+                    }
+
+                    else if (data == "ErrorArabicName") {
+                        if ($("#language").html() == "اللغة") {
+                            AlertNotify("danger", "عفوا لقد ادخلت اسم مرجع باللغة العربية موجود  من قبل ");
+                        }
+                        else { AlertNotify("danger", "Sorry, You Entered Existing Reference in Arabic Name!"); }
+                        $("#Name").val('');
+                    }
+
+                    else if (data == "ErrorEngName") {
+                        if ($("#language").html() == "اللغة") {
+                            AlertNotify("danger", "عفوا لقد ادخلت اسم مرجع باللغة الانجليزية موجود  من قبل ");
+                        }
+                        else { AlertNotify("danger", "Sorry, You  Existing Reference in English Name!"); }
+                        $("#NameEng").val('');
+                    }
+                    else {
+                        AlertNotify("danger", data);
+                    }
+                    hideloader();
+                },
+                error: function (data) {
+                    alert('error');
+                    hideloader();
+                }
+            })
+        }
+
+        function Remove() {
+
+            if (selectedItem[0] === undefined) {
+                if ($("#language").html().trim() == "  اللغة") { AlertNotify("danger", "عفوا لابد من اختيارالمرجع  "); }
+                else { AlertNotify("danger", "You must choose the  Reference"); }
+                return false;
+            }
+
+            if (ParentID == "") {
+                if ($("#language").html() == "اللغة") { AlertNotify("danger", "عفوا لا يمكن حذف هذا المرجع"); }
+                else { AlertNotify("danger", "Sorry, You couldn't Delete  this reference!"); }
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                datatype: 'json',
+                contenttype: 'application/json; charset=utf-8',
+                url: '/LockUp/Remove',
+                data: { _ID: selectedItem[0].id },
+                success: function (data) {
+                    $("#CloseModel").click();
+
+                    if (data == "Done") {
+                        if ($("#language").html() == "اللغة") {
+                            AlertNotify("success", "تم الحذف بنجاح");
+                        }
+                        else {
+                            AlertNotify("success", "Deleted Successfully");
+                        }
+                        setTimeout(function () { location.reload(); }, 1500)
+                    }
+
+                    else if (data == "Exist") {
+                        if ($("#language").html() == "اللغة") {
+                            AlertNotify("success", "لا يمكن حذف هذا المرجع لوجود مراجع مرتبطه به");
+                        }
+                        else {
+                            AlertNotify("danger", "you couldn't delete this Reference because of its childrens");
+                        }
+                    }
+
+                    else {
+                        AlertNotify("danger", data);
+                    }
+
+                    hideloader();
+                },
+                error: function (data) {
+                    alert('error');
+                    hideloader();
+                }
+            })
+        }
+    </script>
+}
+

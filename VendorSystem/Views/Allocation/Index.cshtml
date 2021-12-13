@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = VendorSystem.Resources.Resource.Allocation;
+}
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="glyphicon glyphicon-inbox" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.Allocation</h2>
+        <div id="DivButton" style="display:inline-block;">
+
+            <button type="button" onclick="window.location.reload()" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                @VendorSystem.Resources.Resource.New
+            </button>
+
+            @if (Authentication.IsVisiable("Allocation", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="CheckValidation()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-floppy-saved bigger-120 "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-8 col-xs-12">
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Region</label>
+                    <span class="span">*</span>
+                    <div class="input-group">
+                        @Html.DropDownList("ddRegion", ViewBag.Region as SelectList, VendorSystem.Resources.Resource.Select)
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Territory</label>
+                    <div class="input-group">
+                        <select id="ddTerritory"></select>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Route</label>
+                    <div class="input-group">
+                        <select id="ddRoute"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4  col-md-4 col-xs-12">
+                <div class="col-lg-8  col-md-8 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.ExpectedDeliveredDate </label>
+                    <span class="span">*</span>
+                    <div class="input-group">
+                        <input class="form-control date-picker" id="ExpectedDeliveredDate" autocomplete="off" />
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    @if (Authentication.IsVisiable("Allocation", TypeButton.Search, Session["RoleID"].ToString()))
+                    {
+                        <button style="margin-top:24px" id="btnSearch" class="btn btn-white btn-info btn-bold" onclick="GitAllProductDataQty()">
+                            <i class="ace-icon glyphicon  glyphicon-search "></i>
+                            @VendorSystem.Resources.Resource.Search
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <table id="tblShowProductQtyData" class="table table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>@VendorSystem.Resources.Resource.BarCode</th>
+                            <th>@VendorSystem.Resources.Resource.ProductCode</th>
+                            <th>@VendorSystem.Resources.Resource.Product_Name</th>
+                            <th class="sum">@VendorSystem.Resources.Resource.ReplenishmentQty</th>
+                            <th>@VendorSystem.Resources.Resource.ShippedQty</th>
+                            <th style="display:none"> Temp ShippedQty</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="sum"></th>
+                            <th></th>
+                            <th style="display:none"></th>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirm">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/ScriptsViews/AllocationJs.js?v3"></script>
+
+
+}
+

@@ -1,0 +1,69 @@
+﻿@{
+
+    ViewBag.Title = VendorSystem.Resources.Resource.Replenishment;
+}
+<style>
+    td {
+        padding-top: 19px !important;
+    }
+</style>
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="margin-top:-8px;background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block">
+            <i class="glyphicon glyphicon-list-alt" style="color: #438eb9;">
+            </i> @VendorSystem.Resources.Resource.Replenishment
+        </h2>
+        <div style="display:inline-block" id="DivButton">
+            @*<button type="button" onclick="New()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                    @VendorSystem.Resources.Resource.New
+                </button>*@
+            <button type="button" onclick="filldataTable()" style="" class="btn btn-white btn-info btn-bold">
+                <i class="glyphicon glyphicon-import "></i>
+                @VendorSystem.Resources.Resource.DownLoadBtn
+            </button>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br />
+
+<div class="container" style="width:98%;margin-top:10px">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-3  col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.DateFrom <span style="color:red; font-size:large">*</span> </label>
+
+                    <div class="input-group">
+                        <input class="form-control date-picker" type="text" id="DateFrom" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-lg-3  col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.DateTO <span style="color:red; font-size:large">*</span>  </label>
+                    <div class="input-group">
+                        <input class="form-control date-picker" id="DateTO" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Route  </label>
+                    <div class="input-group">
+                        @Html.DropDownList("ddRoute", ViewBag.Route as SelectList, VendorSystem.Resources.Resource.Select)
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-xs-12" id="Div_Supplier">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Customers <span style="color:red; font-size:large"></span> </label>
+                    <div class="input-group">
+                        <select id="ddCustomer"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/ScriptsViews/ReplenishmentJs.js?v4"></script>
+}

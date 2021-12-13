@@ -1,0 +1,187 @@
+﻿body {
+}
+
+ .sorting_1 {
+    direction: rtl;
+    text-align: center;
+    padding: 6px 10px;
+    font-style:normal;
+         height:10px;
+
+}
+ .Totals {
+background-color: orange;
+color:blue;
+font-weight:bold;
+}
+  .Percentage {
+background-color: greenyellow;
+color:blue;
+font-weight:bold;
+
+}
+ /*.input-group{
+     margin-bottom:20px;
+ }*/
+ .span{
+     color:red;
+   
+     padding: 1%;
+     font-size:14px;
+     font-weight:bold;
+ }
+ .spangreen{
+     color:#00ff90;
+    font-size:14px;
+     padding: 0%;
+     margin-bottom:0px;
+ }
+ .spanred{
+     color:red;
+   
+     padding: 1%;
+     font-size:11px;
+     
+ }
+
+ .edit{
+     color:blue;  
+     padding: 3%;
+     font-size:12px;
+     cursor: pointer;
+
+ }
+ .input[type=email], input[type=url], input[type=search], input[type=tel], input[type=color], input[type=text], input[type=password], input[type=datetime], input[type=datetime-local], input[type=date], input[type=month], input[type=time], input[type=week], input[type=number], textarea{
+     border: 0.5px solid #438eb9;
+ }
+th, table.dataTable tbody td {
+    text-align: center !important;
+    height:15px;
+}
+.table-bordered{
+     scrollY:20%;
+     
+}
+
+.input-group .form-control {
+    margin-bottom: 14px;
+}
+
+input[type=checkbox].ace.ace-switch+.lbl::before{
+        background-color:red !important;
+        color:white !important;
+}
+input[type=checkbox].ace.ace-switch:checked + .lbl::before {
+    background-color:#36cc22 !important;
+}
+  .glyphicon  {
+        font-size:12px !important;
+        }
+h2 .glyphicon {
+        font-size: 21px !important;
+}
+
+input {
+margin-bottom:0 !important;
+}
+
+
+ .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9
+{
+    margin-bottom:10px !important;
+
+}
+
+
+.dataTables_wrapper.no-footer{
+    overflow:scroll;
+
+}
+
+.datepicker {
+
+z-index:99999;}
+
+
+
+@font-face {
+    font-family: 'Crimson-Roman';
+    src: url('../../fonts/OTF/Crimson-Roman.otf') format('opentype');
+}
+
+
+label,a,th,h1,h2,h3,h4,h5,h6,option,span,li {
+font-family:Crimson-Roman;
+}
+.zoom:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+
+@font-face {
+    font-family: 'IDAutomationHC39M';
+    src: url('../../fonts/BarcodeFont/IDAutomationHC39M .ttf') format('truetype');
+}
+@font-face {
+    font-family: 'IDAutomationHC39XS';
+    src: url('../../fonts/BarcodeFont/IDAutomationHC39XS.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Barcode3of9forCR8';
+    src: url('../../fonts/BarcodeFont/Barcode3of9forCR8.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IDAutomationSC93M';
+    src: url('../../fonts/BarcodeFont/IDAutomationSC93M.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'BARCOD39';
+    src: url('../../fonts/BarcodeFont/BARCOD39.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'bar-code_39';
+    src: url('../../fonts/BarcodeFont/bar-code_39.ttf') format('truetype');
+}
+@font-face {
+    font-family: '3OF9_NEW';
+    src: url('../../fonts/BarcodeFont/3OF9_NEW.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Code39Logitogo';
+    src: url('../../fonts/BarcodeFont/Code-39-Logitogo.ttf') format('truetype');
+}
+#DivButton {
+float:left;
+}
+
+
+.loader {
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    top:0%;
+    /*right:50%;*/
+    z-index:9999999;
+    opacity:.7;
+    background-color:#000;
+        text-align: center;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.top{
+     z-index:9999999;
+}
+
+input[readonly] {
+    color: black !important;
+  
+}
+
+tfoot tr{
+    background-color:#e8ecf2;
+}
+.dataTables_wrapper.no-footer {
+    overflow: unset;
+}

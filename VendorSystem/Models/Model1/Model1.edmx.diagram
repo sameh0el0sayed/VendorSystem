@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="310ef85a5eef40438ed66c5a822b4a6c" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="BayanModel.LockUp" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.Notifcation" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.OrderManagementDetail" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BayanModel.OrderManagementMaster" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.Page" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.PageVSRole" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BayanModel.Replenish_Master" Width="1.5" PointX="6.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BayanModel.Role" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_CalculationType" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_CentralizedLockUp" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_Company" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_CustomerCompensationDetail" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_CustomerCompensationMstr" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_CustomerDtl" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_CustomerMaster" Width="1.5" PointX="12.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_Distributor" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_Jobs" Width="1.5" PointX="4.75" PointY="13.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_LastUpdateFromCenteralDB" Width="1.5" PointX="6.75" PointY="13.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_Product" Width="1.5" PointX="8.75" PointY="13.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_ProductAttribute" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_ProductVsDistributor" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_RepConfig_Mstr" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_Route" Width="1.5" PointX="2.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_RouteCombinDtl" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_RouteCombinDtlCustomer" Width="1.5" PointX="4.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_RouteCombinDtlFirstClass" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_RouteCombinDtlSecondClass" Width="1.5" PointX="16.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_RouteCombinMaster" Width="1.5" PointX="16.75" PointY="14.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_Rpt_CompensationDetail" Width="1.5" PointX="10.75" PointY="17.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_Rpt_CompensationMstr" Width="1.5" PointX="12.75" PointY="17.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_ScheduleType" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_ShelfLife" Width="1.5" PointX="18.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_WeekDay" Width="1.5" PointX="18.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BayanModel.User" Width="1.5" PointX="18.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetActiveReplenishConfiguration" Width="1.5" PointX="18.75" PointY="14.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetAllCustomersVM" Width="1.5" PointX="4.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetAllDistributorsVM" Width="1.5" PointX="6.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetAllRouteCombinationsVM" Width="1.5" PointX="14.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetAllRoutesVM" Width="1.5" PointX="16.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetCompensationData" Width="1.5" PointX="18.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetProductCurrentStatus" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.V_GetRegionByRoutes" Width="1.5" PointX="20.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BayanModel.V_ProductInternalCode" Width="1.5" PointX="20.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BayanModel.Replenish_Details" Width="1.5" PointX="0.75" PointY="21.75" />
+        <EntityTypeShape EntityType="BayanModel.V_Replenish_Results" Width="1.5" PointX="21.375" PointY="13.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_RepConfig_RepScheduleType" Width="1.5" PointX="23.375" PointY="7.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_OrdConfig_VisitScheduleType" Width="1.5" PointX="23.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_OrdConfig_Mstr" Width="1.5" PointX="23.375" PointY="10.75" />
+        <EntityTypeShape EntityType="BayanModel.Tbl_OrdConfigCustomer" Width="1.5" PointX="23.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

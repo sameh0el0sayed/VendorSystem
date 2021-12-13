@@ -1,0 +1,35 @@
+﻿@model IEnumerable< VendorSystem.Models.Model1.Notifcation>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="breadcrumbs" class=" breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white;margin-top:13px">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="fa fa-bell icon-animated-bell" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.Notifcations</h2>
+
+    </div>
+</div>
+<br /><br /><br />
+
+<div class="panel">
+    <div class="panel-body">
+        <table id="tbShowData" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>@VendorSystem.Resources.Resource.Message</th>
+                    <th>@VendorSystem.Resources.Resource.Date</th>
+                    <th>@VendorSystem.Resources.Resource.Status</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+    var Notifcations = JSON.parse('@Html.Raw(Json.Encode(Model))')
+    </script>
+    <script src="~/Scripts/ScriptsViews/NotifcationJs.js"></script>
+}

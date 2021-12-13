@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = VendorSystem.Resources.Resource.ProductCode;
+}
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="glyphicon glyphicon-inbox" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.ProductCode</h2>
+        <div id="DivButton" style="display:inline-block;">
+
+            @if (Session["DistributorCode"] != null && Session["DistributorCode"].ToString() != "" && Authentication.IsVisiable("Role", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button id="Save" type="button" onclick="CheckValidation()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-floppy-saved bigger-120 "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<br /><br /><br />
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            @if (Session["DistributorCode"] == null || Session["DistributorCode"].ToString() == "")
+            {
+                <div style="text-align:center; align-items:center; font:200; color:red">
+                    @VendorSystem.Resources.Resource.NoDistributorForThisUser
+                </div>
+            }
+
+            @if (Session["DistributorCode"] != null && Session["DistributorCode"].ToString() != "" && Authentication.IsVisiable("Product Code", TypeButton.Search, Session["RoleID"].ToString()))
+            {
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.DownloadProductBarcodeList</label>
+                <div class="input-group">
+                    <button type="button" onclick="DownloadCurrentStatus()" style="width:30%; height:30px" class="btn btn-white btn-info btn-bold" title="@VendorSystem.Resources.Resource.DownloadProductBarcodeList">
+                        <i class="ace-icon glyphicon glyphicon-download bigger-120" title="@VendorSystem.Resources.Resource.DownloadProductBarcodeList"></i>
+                    </button>
+                </div>
+            </div>
+            }
+
+            @if (Session["DistributorCode"] != null && Session["DistributorCode"].ToString() != "" && Authentication.IsVisiable("Product Code", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.UploadFile</label>
+                    <div class="input-group">
+                        <input type="file" accept=".xls,.xlsx" style="width:60%; height:30px" class="ace-icon glyphicon  glyphicon-upload" id="btnUpload" />
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</div>
+
+<div id="ModalConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirm">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/ScriptsViews/ProductCodeJS.js?v2"></script>
+
+}
+

@@ -1,0 +1,265 @@
+﻿@{
+    ViewBag.Title = VendorSystem.Resources.Resource.Customers;
+}
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="glyphicon glyphicon-inbox" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.Customers</h2>
+        <div id="DivButton" style="display:inline-block;">
+
+            <button type="button" onclick="window.location.reload()" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                @VendorSystem.Resources.Resource.New
+            </button>
+
+            @if (Authentication.IsVisiable("Customers", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="CheckValidation()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-floppy-saved bigger-120 "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+            @if (Authentication.IsVisiable("Customers", TypeButton.Search, Session["RoleID"].ToString()))
+            {
+                <button type="button" data-toggle="modal" data-target="#ModalShowCustomersData" data-backdrop="static" data-keyboard="false" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon  glyphicon-search "></i>
+                    @VendorSystem.Resources.Resource.Search
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<br /><br /><br />
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CustomerName</label>
+                <div class="input-group">
+                    <input type="text" id="txtStoreName" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CustomerNameEng</label>
+                <div class="input-group">
+                    <input type="text" id="txtStoreNameEng" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CompanyName</label>
+                <div class="input-group">
+                    <input type="text" id="txtCompanyName" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CompanyNameEng</label>
+                <div class="input-group">
+                    <input type="text" id="txtCompanyNameEng" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Country</label>
+                <div class="input-group">
+                    @Html.DropDownList("ddCountry", ViewBag.Country as SelectList, VendorSystem.Resources.Resource.Select, new { @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Province</label>
+                <div class="input-group">
+                    <select id="ddProvince" disabled="disabled"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.City</label>
+                <div class="input-group">
+                    <select id="ddCity" disabled="disabled"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Region</label>
+                <div class="input-group">
+                    <select id="ddRegion" disabled="disabled"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Territory</label>
+                <div class="input-group">
+                    <select id="ddTerritory" disabled="disabled"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Customer_ID</label>
+                <div class="input-group">
+                    <input type="text" id="txtCustomerCode" maxlength="15" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Phone</label>
+                <div class="input-group">
+                    <input type="text" id="txtPnone" maxlength="15" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Mobile</label>
+                <div class="input-group">
+                    <input type="text" id="txtMobile" maxlength="15" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Address</label>
+                <div class="input-group">
+                    <input type="text" id="txtAddress" maxlength="50" style="width:100%" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.VatNumber</label>
+                <div class="input-group">
+                    <input type="text" id="txtVatNumber" maxlength="100" style="width:100%" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CommercialRegistration</label>
+                <div class="input-group">
+                    <input type="text" id="txtCommercialRegistration" maxlength="100" style="width:100%" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Routes</label>
+                <div class="input-group">
+                    <input type="text" id="txtAssingRoutes" maxlength="100" style="width:100%" class="form-control input" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.VisitSchedule</label>
+                <div class="input-group">
+                    <select id="ddVisitSchedule"></select>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CustomerType</label>
+                <div class="input-group">
+                    @Html.DropDownList("ddStoreType", ViewBag.StoreType as SelectList, VendorSystem.Resources.Resource.Select)
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CustomerCategory</label>
+                <div class="input-group">
+                    @Html.DropDownList("ddStoreCategory", ViewBag.StoreCategory as SelectList, VendorSystem.Resources.Resource.Select)
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CustomerClassification</label>
+                <div class="input-group">
+                    @Html.DropDownList("ddStoreClassification", ViewBag.StoreClassification as SelectList, VendorSystem.Resources.Resource.Select)
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label>@VendorSystem.Resources.Resource.Active</label>
+                <div class="input-group">
+                    <input id="Active" class='ace ace-switch ace-switch-2 check' type='checkbox' checked />
+                    <span class='lbl'></span>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <div id="Map" style="height: 500px;border: 2px groove #676767;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="ModalShowCustomersData" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 90%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" id="Xbtn" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <table id="tblShowCustomersData" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@VendorSystem.Resources.Resource.CompanyName</th>
+                                    <th>@VendorSystem.Resources.Resource.CustomerName</th>
+                                    <th>@VendorSystem.Resources.Resource.Customer_ID</th>
+                                    <th>@VendorSystem.Resources.Resource.City</th>
+                                    <th>@VendorSystem.Resources.Resource.Address</th>
+                                    <th>@VendorSystem.Resources.Resource.Mobile</th>
+                                    <th>@VendorSystem.Resources.Resource.Status</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseModalShowCustomersData">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirm">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        _AllCustomers = JSON.parse('@Html.Raw(Json.Encode(ViewBag.Customer))');
+    </script>
+
+    <script src="https://openlayers.org/api/OpenLayers.js"></script>
+    <script src="~/Scripts/Map/leaflet.js"></script>
+    <script src="~/Scripts/ScriptsViews/MapJS.js"></script>
+
+    <script src="~/Scripts/ScriptsViews/GeographicalAreaJs.js"></script>
+    <script src="~/Scripts/ScriptsViews/CustomersJs.js?v2"></script>
+
+
+}
+

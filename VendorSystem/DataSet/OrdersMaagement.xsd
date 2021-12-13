@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ShippedOrders" targetNamespace="http://tempuri.org/ShippedOrders.xsd" xmlns:mstns="http://tempuri.org/ShippedOrders.xsd" xmlns="http://tempuri.org/ShippedOrders.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=.;Initial Catalog=RichBakeTest;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" IsAppSettingsProperty="false" Modifier="Assembly" Name="BayanEntities (VendorSystem)" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ShippedOrders" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ShippedOrders" msprop:Generator_UserDSName="ShippedOrders">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="OrderDT" msprop:Generator_TableClassName="OrderDTDataTable" msprop:Generator_TableVarName="tableOrderDT" msprop:Generator_TablePropName="OrderDT" msprop:Generator_RowDeletingName="OrderDTRowDeleting" msprop:Generator_RowChangingName="OrderDTRowChanging" msprop:Generator_RowEvHandlerName="OrderDTRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderDTRowDeleted" msprop:Generator_UserTableName="OrderDT" msprop:Generator_RowChangedName="OrderDTRowChanged" msprop:Generator_RowEvArgName="OrderDTRowChangeEvent" msprop:Generator_RowClassName="OrderDTRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BarCode" msprop:Generator_ColumnVarNameInTable="columnBarCode" msprop:Generator_ColumnPropNameInRow="BarCode" msprop:Generator_ColumnPropNameInTable="BarCodeColumn" msprop:Generator_UserColumnName="BarCode" type="xs:string" minOccurs="0" />
+              <xs:element name="InternalCode" msprop:Generator_ColumnVarNameInTable="columnInternalCode" msprop:Generator_ColumnPropNameInRow="InternalCode" msprop:Generator_ColumnPropNameInTable="InternalCodeColumn" msprop:Generator_UserColumnName="InternalCode" type="xs:string" minOccurs="0" />
+              <xs:element name="ProductName" msprop:Generator_ColumnVarNameInTable="columnProductName" msprop:Generator_ColumnPropNameInRow="ProductName" msprop:Generator_ColumnPropNameInTable="ProductNameColumn" msprop:Generator_UserColumnName="ProductName" type="xs:string" minOccurs="0" />
+              <xs:element name="RepQty" msprop:Generator_ColumnVarNameInTable="columnRepQty" msprop:Generator_ColumnPropNameInRow="RepQty" msprop:Generator_ColumnPropNameInTable="RepQtyColumn" msprop:Generator_UserColumnName="RepQty" type="xs:string" minOccurs="0" />
+              <xs:element name="ApprovedQty" msprop:Generator_ColumnVarNameInTable="columnApprovedQty" msprop:Generator_ColumnPropNameInRow="ApprovedQty" msprop:Generator_ColumnPropNameInTable="ApprovedQtyColumn" msprop:Generator_UserColumnName="ApprovedQty" type="xs:string" minOccurs="0" />
+              <xs:element name="ShippedQty" msprop:Generator_ColumnVarNameInTable="columnShippedQty" msprop:Generator_ColumnPropNameInRow="ShippedQty" msprop:Generator_ColumnPropNameInTable="ShippedQtyColumn" msprop:Generator_UserColumnName="ShippedQty" type="xs:string" minOccurs="0" />
+              <xs:element name="DeliveredQty" msprop:Generator_ColumnVarNameInTable="columnDeliveredQty" msprop:Generator_ColumnPropNameInRow="DeliveredQty" msprop:Generator_ColumnPropNameInTable="DeliveredQtyColumn" msprop:Generator_UserColumnName="DeliveredQty" type="xs:string" minOccurs="0" />
+              <xs:element name="VendorPrice" msprop:Generator_ColumnVarNameInTable="columnVendorPrice" msprop:Generator_ColumnPropNameInRow="VendorPrice" msprop:Generator_ColumnPropNameInTable="VendorPriceColumn" msprop:Generator_UserColumnName="VendorPrice" type="xs:string" minOccurs="0" />
+              <xs:element name="MarketPrice" msprop:Generator_ColumnVarNameInTable="columnMarketPrice" msprop:Generator_ColumnPropNameInRow="MarketPrice" msprop:Generator_ColumnPropNameInTable="MarketPriceColumn" msprop:Generator_UserColumnName="MarketPrice" type="xs:string" minOccurs="0" />
+              <xs:element name="ShippedSubTotal" msprop:Generator_ColumnVarNameInTable="columnShippedSubTotal" msprop:Generator_ColumnPropNameInRow="ShippedSubTotal" msprop:Generator_ColumnPropNameInTable="ShippedSubTotalColumn" msprop:Generator_UserColumnName="ShippedSubTotal" type="xs:string" minOccurs="0" />
+              <xs:element name="DeliveredSubTotal" msprop:Generator_ColumnVarNameInTable="columnDeliveredSubTotal" msprop:Generator_ColumnPropNameInRow="DeliveredSubTotal" msprop:Generator_ColumnPropNameInTable="DeliveredSubTotalColumn" msprop:Generator_UserColumnName="DeliveredSubTotal" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

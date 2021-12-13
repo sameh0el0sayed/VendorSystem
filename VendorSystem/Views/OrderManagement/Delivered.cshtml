@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = VendorSystem.Resources.Resource.Delivered;
+
+}
+
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="display:inline-block">
+            <i class="glyphicon glyphicon-list-alt">
+            </i> @VendorSystem.Resources.Resource.Delivered
+        </h2>
+        <div style="display:inline-block;" id="DivButton">
+            @if (Authentication.IsVisiable("Delivered Purchase Order", TypeButton.Search, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="Search()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                    @VendorSystem.Resources.Resource.Search
+                </button>
+            }
+             
+            @if (Authentication.IsVisiable("Receive Purchase Order", TypeButton.Print, Session["RoleID"].ToString()))
+            {
+                <button style="display:none" id="btnPrintDeliveredOrder" type="button" onclick="PrintDeliveredOrder()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-print "></i>
+                    @VendorSystem.Resources.Resource.Print
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br />
+<div class="container" style="width:98%;margin-top:10px">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.PO_DocumentNumber</label>
+                    <div class="input-group">
+                        @Html.TextBox("DocumentNumber", " ", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12" id="DivSub_WH_Id">
+                    <label class="control-label">@VendorSystem.Resources.Resource.ToStore</label>
+                    <div class="input-group">
+                        @Html.DropDownList("StoreId", ViewBag.SubWareHouse as SelectList, VendorSystem.Resources.Resource.Select)
+                    </div>
+                </div>
+                <div class="col-lg-3  col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.ExpectedDeliveredDate </label>
+                    <div class="input-group">
+                        <input class="form-control date-picker" disabled="disabled" id="ExpectedDeliveredDate" autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+            @*Sameh Code*@
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.CustomerCode</label>
+                    <div class="input-group">
+                        @Html.TextBox("CustomerCode", " ", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.RouteName</label>
+                    <div class="input-group">
+
+                        @Html.TextBox("RouteName", "", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Region</label>
+                    <div class="input-group">
+
+                        @Html.TextBox("RegionName", "", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Territory</label>
+                    <div class="input-group">
+
+                        @Html.TextBox("TerritoryName", "", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <table id="tbShowData" class="table table-bordered" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@VendorSystem.Resources.Resource.Code</th>
+                            <th>@VendorSystem.Resources.Resource.BarCode</th>
+                            <th>@VendorSystem.Resources.Resource.Product_Name</th>
+                            <th>@VendorSystem.Resources.Resource.ReplenishmentQty</th>
+                            <th>@VendorSystem.Resources.Resource.Request</th>
+                            <th>@VendorSystem.Resources.Resource.ShippedQty</th>
+                            <th>@VendorSystem.Resources.Resource.deliveredQty</th>
+                            <th>@VendorSystem.Resources.Resource.Price</th>
+                            <th>@VendorSystem.Resources.Resource.SellPrice</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalShowReceivedPosData" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 90%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" id="Xbtn" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+
+                        <table id="tblPOData" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@VendorSystem.Resources.Resource.PO_DocumentNumber</th>
+                                    <th>@VendorSystem.Resources.Resource.CustomerName</th>
+                                    <th>@VendorSystem.Resources.Resource.RecievedDate</th>
+                                    <th>@VendorSystem.Resources.Resource.ShippedDate</th>
+                                    <th>@VendorSystem.Resources.Resource.DeliveredDate</th>
+                                    <th>@VendorSystem.Resources.Resource.ExpectedDeliveredDate</th> 
+                                    <th>@VendorSystem.Resources.Resource.CustomerCode</th>
+                                    <th style="width:20%">@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModalShowReceivedPosData">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var _Status = 5;
+    </script>
+    <script src="~/Scripts/ScriptsViews/ShippedRejectedDeliveredOM.js?v3"></script>
+}

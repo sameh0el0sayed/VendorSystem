@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = VendorSystem.Resources.Resource.Route;
+}
+<link href="~/Content/Map/leaflet.css" rel="stylesheet" />
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block">
+            <i class="glyphicon glyphicon-inbox" style="color: #438eb9;">
+            </i> @VendorSystem.Resources.Resource.Route
+        </h2>
+        <div id="DivButton" style="display:inline-block;">
+
+            <button type="button" onclick="window.location.reload()" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                @VendorSystem.Resources.Resource.New
+            </button>
+
+            @if (Authentication.IsVisiable("Route", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="CheckValidation()" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon glyphicon-floppy-saved bigger-120 "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+            @if (Authentication.IsVisiable("Route", TypeButton.Search, Session["RoleID"].ToString()))
+            {
+                <button type="button" data-toggle="modal" data-target="#ModalShowRoutesData" data-backdrop="static" data-keyboard="false" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon  glyphicon-search "></i>
+                    @VendorSystem.Resources.Resource.Search
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Name</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="text" id="txtName" style="width:100%" />
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.NameEng</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="text" id="txtNameEng" style="width:100%" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Code</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="text" id="txtRouteCode" style="width:100%" />
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Country</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    @Html.DropDownList("ddCountry", ViewBag.Country as SelectList, VendorSystem.Resources.Resource.Select)
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Province</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <select id="ddProvince"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.City</label>
+                <div class="input-group">
+                    <select id="ddCity"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Region</label>
+                <div class="input-group">
+                    <select id="ddRegion"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Territory</label>
+                <div class="input-group">
+                    <select id="ddTerritory"></select>
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Note</label>
+                <div class="input-group">
+                    <input type="text" style="width:100%" id="txtNote" />
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label>@VendorSystem.Resources.Resource.Active</label>
+                <div class="input-group">
+                    <input id="Active" class='ace ace-switch ace-switch-2 check' type='checkbox' checked />
+                    <span class='lbl'></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Templete</label>
+                <div class="input-group">
+                    <button type="button" onclick="window.open(window.location.origin + '/Content/Excell/Route Templete.xlsx', '_blank')" style="width:30%; height:30px" class="btn btn-white btn-info btn-bold" title="@VendorSystem.Resources.Resource.DownloadProductBarcodeList">
+                        <i class="ace-icon glyphicon glyphicon-download bigger-120" title="@VendorSystem.Resources.Resource.Templete"></i>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.UploadAndSave</label>
+                <div class="input-group">
+                    <input type="file" accept=".xls,.xlsx" style="width:60%; height:30px" class="ace-icon glyphicon  glyphicon-upload" id="btnUpload" onchange="if ($('#btnUpload')[0].value.split(/(\\|\/)/g).pop() != '') { $('#ModalConfirmUpload').modal(); }" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalShowRoutesData" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 90%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" id="Xbtn" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <table id="tblShowRoutesData" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@VendorSystem.Resources.Resource.Name</th>
+                                    <th>@VendorSystem.Resources.Resource.Code</th>
+                                    <th>@VendorSystem.Resources.Resource.Country</th>
+                                    <th>@VendorSystem.Resources.Resource.City</th>
+                                    <th>@VendorSystem.Resources.Resource.Status</th>
+                                    <th>@VendorSystem.Resources.Resource.Note</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseModalShowRoutesData">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirm">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="ModalConfirmUpload" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="UploadAndSave()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirmUpload">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        _AllRoutes = JSON.parse('@Html.Raw(Json.Encode(ViewBag.Routes))');
+    </script>
+
+    <script src="~/Scripts/ScriptsViews/GeographicalAreaJs.js"></script>
+    <script src="~/Scripts/ScriptsViews/RoutesJs.js?v2"></script>
+
+}

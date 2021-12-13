@@ -1,0 +1,74 @@
+﻿@using System.Globalization;
+@using System.Threading;
+@{
+
+    CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+    string Lang = currentCulture.Name;
+    if (Lang == "ar-SA")
+    {
+        <style>
+            .shortcut {
+                float:left;
+                    padding-left:10px;
+            }
+            #ShortCut + span {
+            width:100px !important;
+            
+            }
+        </style>
+    }
+    else
+    {
+        <style>
+            .shortcut {
+                float: right;
+                    padding-right:10px;
+            }
+                 #ShortCut + span {
+            width:100px !important;         
+            }
+       </style>
+    }
+}
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="text-align:center;margin:0px 4px 0px 4px">
+    <ul class="breadcrumb" style="display:inline-block;margin:0px 12px 0 22px !important" >
+        <li>
+            @{var HQ = "HQ";}
+            @{
+                string user = Session["MainWarehouseName"] as string;
+                <img src="~/images/byan.png" width="55px" height="48px" style="padding:0px"  />
+                HQ = user; //_context.StoreWarehouses.Where(a => a.Sub_WH_Na == user).FirstOrDefault().Sub_WH_Na;
+                var Company = Session["CompanyID"] as string;
+               <input id="UserCompanyID" value="@Company" class=" form-control"  style="display:none"/>
+}
+          @HQ  
+        </li>
+    </ul><!-- /.breadcrumb -->
+    <div style="display:none" class="shortcut">@*style="display:inline-block"*@
+        <span> <button class="btn btn-info" style="padding:0" id="GO"> GO  </button></span>
+    </div>
+    &nbsp;   &nbsp;
+    <div style="display:none;margin: 0px 4px 0 4px;" class="shortcut">
+        <select id="ShortCut">
+            <option value="">@VendorSystem.Resources.Resource.Select</option>
+            <option value="/Bank/index">BNK</option>
+            <option value="/Brand/index">Bnd</option>
+            <option value="/Partner/index">PTR</option>
+            <option value="/Model/index">MDL</option>
+            <option value="/Payment/index">PAY</option>
+            <option value="/PaymentGroups/index">PAYG</option>
+            <option value="/Catogary/index">CTG</option>
+            <option value="/MainWareHouse/index">MSTR</option>
+            <option value="/SubWareHouse/index">SSTR</option>
+            <option value="/PurchaseUom/index">PUNT</option>
+            <option value="/Product/index">PDCT</option>
+            <option value="/Store/BeginingStock">OBNB</option>
+            <option value="/Store/Tranaction">TRAS </option>
+            <option value="/StoreInventory/Inventory">STK</option>
+            <option value="/PurchaseOrder/index">PO</option>
+            <option value="/PurchaseOrder/ActivatePurchaseOrder">POA</option>
+        </select>
+    </div>
+
+</div>
+

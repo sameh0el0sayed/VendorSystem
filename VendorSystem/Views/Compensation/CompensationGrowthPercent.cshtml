@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = VendorSystem.Resources.Resource.Compensation;
+}
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="glyphicon glyphicon-inbox" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.CompensationGrowthPercent</h2>
+
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CustomerName</label>
+                <div class="input-group">
+                    @Html.DropDownList("ddCustomer", ViewBag.Customer as SelectList, VendorSystem.Resources.Resource.Select)
+                </div>
+            </div>
+
+            @*<div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Route</label>
+                <div class="input-group">
+                    <select class="form-control"></select>
+                    @Html.DropDownList("ddRoute", ViewBag.Customer as SelectList, VendorSystem.Resources.Resource.Select)
+
+                </div>
+            </div>*@
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.DateFrom</label>
+                <div class="input-group">
+                    <input class="form-control date-picker" type="text" id="DateFrom" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.DateTO</label>
+                <div class="input-group">
+                    <input class="form-control date-picker" id="DateTO" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.DownLoadBtn</label>
+                <div class="input-group">
+                    <button type="button" onclick="DownloadGrowthData()" class="btn btn-white btn-info btn-bold" style="height:33px; width:100%">
+                        <i class="ace-icon glyphicon glyphicon-download bigger-120 "></i>
+                        @VendorSystem.Resources.Resource.DownLoadBtn
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/ScriptsViews/CompensationJs.js?v3"></script>
+}

@@ -1,0 +1,80 @@
+﻿@{
+
+    ViewBag.Title = VendorSystem.Resources.Resource.ReplenishmentReport;
+}
+<style>
+    td {
+        padding-top: 19px !important;
+    }
+</style>
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="margin-top:-8px;background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block">
+            <i class="glyphicon glyphicon-list-alt" style="color: #438eb9;">
+            </i> @VendorSystem.Resources.Resource.ReplenishmentReport
+        </h2>
+        <div style="display:inline-block" id="DivButton"> 
+            <button type="button" onclick="DownloadFile()" style="" class="btn btn-white btn-info btn-bold">
+                <i class="glyphicon glyphicon-import "></i>
+                @VendorSystem.Resources.Resource.DownLoadBtn
+            </button>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="container" style="width:98%;margin-top:10px">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6  col-md-6 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.DateFrom  </label>
+
+                    <div class="input-group">
+                        <input class="form-control date-picker" type="text" id="DateFrom" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-lg-6  col-md-6 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.DateTO  </label>
+                    <div class="input-group">
+                        <input class="form-control date-picker" id="DateTO" autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Region</label>
+                    <div class="input-group">
+                        @Html.DropDownList("ddRegion", ViewBag.Region as SelectList, VendorSystem.Resources.Resource.Select)
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Territory</label>
+                    <div class="input-group">
+                        <select id="ddTerritory"></select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Route</label>
+                    <div class="input-group">
+                        <select id="ddRoute"></select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-xs-12">
+                    <label class="control-label">@VendorSystem.Resources.Resource.Customers </label>
+                    <div class="input-group">
+                        <select id="ddCustomer"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/ScriptsViews/ReplenishmentReportJs.js?v2"></script>
+}

@@ -1,0 +1,248 @@
+﻿@{
+    ViewBag.Title = VendorSystem.Resources.Resource.Products;
+}
+
+<div class="breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white">
+    <div class="panel-body">
+        <h2 style="color:#56bbf5; display:inline-block"> <i class="fa fa-file-archive-o" style="color: #438eb9;"></i> @VendorSystem.Resources.Resource.Products</h2>
+        <div id="DivButton" style="display:inline-block;">
+
+            <button type="button" id="NewBtn" onclick="window.location.reload()" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                @VendorSystem.Resources.Resource.New
+            </button>
+            @if (Authentication.IsVisiable("Products", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="CheckValidation()" class="btn btn-white btn-info btn-bold" data-backdrop="static" data-keyboard="false">
+                    <i class="ace-icon glyphicon glyphicon-floppy-saved bigger-120 "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+
+            @if (Authentication.IsVisiable("Products", TypeButton.Search, Session["RoleID"].ToString()))
+            {
+                <button type="button" data-toggle="modal" data-target="#ModalShowProductsData" data-backdrop="static" data-keyboard="false" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon glyphicon  glyphicon-search "></i>
+                    @VendorSystem.Resources.Resource.Search
+                </button>
+
+            }
+
+            @if (Authentication.IsVisiable("Products", TypeButton.Search, Session["RoleID"].ToString()))
+            {
+                <button type="button" onclick="DownloadCurrentStatus()" class="btn btn-white btn-info btn-bold" title="@VendorSystem.Resources.Resource.DownloadCurrentStatus">
+                    <i class="ace-icon glyphicon glyphicon-download bigger-120" title="@VendorSystem.Resources.Resource.DownloadCurrentStatus"> </i>
+                    @VendorSystem.Resources.Resource.DownloadCurrentStatus
+                </button>
+
+            }
+        </div>
+    </div>
+</div>
+<br /><br /><br />
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.LargeBarcode</label>
+                <div class="input-group">
+                    <input type="text" id="txtLargBarcode" class="form-control" autocomplete="off" style="text-align:center;width:100%" maxlength="20" />
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.SmallBarcode</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="text" id="txtSmallBarcode" class="form-control" autocomplete="off" style="text-align:center;width:100%" maxlength="20" />
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Product_Name</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="text" id="txtProduct_Name" class="form-control" style="text-align:center;width:100%" />
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Product_NameEn</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="text" id="txtProduct_NameEn" class="form-control" style="text-align:center;width:100%" />
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.FirstClassification</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    @Html.DropDownList("ddFirstClassification", ViewBag.FirstClassification as SelectList, new { @multiple = "multiple" })
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.SecondClassification</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <select multiple id="ddSecondClassification"></select>
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <label class="control-label">@VendorSystem.Resources.Resource.UnitConversion</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="number" id="txtUnitConversion" class="form-control" maxlength="3" min="1" value="1" style="text-align:center;width:100%" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <label class="control-label">@VendorSystem.Resources.Resource.Weight</label>
+                <div class="input-group">
+                    <input type="number" id="txtWeight" class="form-control" maxlength="8" style="text-align:center;width:100%" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <label class="control-label">@VendorSystem.Resources.Resource.ReturnPercentage</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="number" value="0" min="0" id="txtReturnPercentage" class="form-control" autocomplete="off" style="text-align:center; width:100%" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <label class="control-label">@VendorSystem.Resources.Resource.MinQtyPerpercentage</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    <input type="number" value="0" min="0" id="txtMinQty" class="form-control" autocomplete="off" style="text-align:center; width:100%" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <label class="control-label">@VendorSystem.Resources.Resource.ShelfLife</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    @Html.DropDownList("dropShelfLife", ViewBag.ShelfLife as SelectList, VendorSystem.Resources.Resource.Select)
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <label>@VendorSystem.Resources.Resource.Active</label>
+                <div class="input-group">
+                    <input id="Active" class='ace ace-switch ace-switch-2 check' type='checkbox' checked />
+                    <span class='lbl'></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" style="border-top-color:blue; border-top-style:double; margin:10px; padding:10px">
+
+            <div class="col-lg-4 col-md-6 col-xs-6">
+                <label class="control-label">@VendorSystem.Resources.Resource.Templete</label>
+                <div class="input-group">
+                    <button type="button" onclick="window.open(window.location.origin + '/Content/Excell/Product Template.xlsx', '_blank')" style="width:30%; height:30px" class="btn btn-white btn-info btn-bold" title="@VendorSystem.Resources.Resource.Templete">
+                        <i class="ace-icon glyphicon glyphicon-download bigger-120" title="@VendorSystem.Resources.Resource.Templete"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-xs-6">
+                <label class="control-label">@VendorSystem.Resources.Resource.UploadFile</label>
+                <div class="input-group">
+                    <input type="file" accept=".xls,.xlsx" style="width:60%; height:30px" class="ace-icon glyphicon  glyphicon-upload" id="btnUpload" onchange="if ($('#btnUpload')[0].value.split(/(\\|\/)/g).pop() != '') { $('#ModalConfirmUpload').modal(); }" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalShowProductsData" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 90%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" id="xbtn" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <table id="tblShowProductsData" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@VendorSystem.Resources.Resource.Product_Name</th>
+                                    <th>@VendorSystem.Resources.Resource.LargeBarcode</th>
+                                    <th>@VendorSystem.Resources.Resource.SmallBarcode</th>
+                                    <th>@VendorSystem.Resources.Resource.Status</th>
+                                    <th>@VendorSystem.Resources.Resource.Process</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseModalShowProductsData">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirm">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirmUpload" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnSave" type="button" onclick="UploadAndSave()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="bntCloseModalConfirmUpload">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/ScriptsViews/ProductsJS.js?v3"></script>
+}
+

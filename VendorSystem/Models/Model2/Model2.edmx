@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CentralizedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CentralizedModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CentralizedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CentralizedEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Products" EntityType="CentralizedModel.Product" />
+          <EntitySet Name="ProductAttributes" EntityType="CentralizedModel.ProductAttribute" />
+          <EntitySet Name="ProductVsDistributors" EntityType="CentralizedModel.ProductVsDistributor" />
+          <EntitySet Name="ProductVsVendors" EntityType="CentralizedModel.ProductVsVendor" />
+          <EntitySet Name="DistributorVsVendors" EntityType="CentralizedModel.DistributorVsVendor" />
+          <EntitySet Name="CustomerRebateAmounts" EntityType="CentralizedModel.CustomerRebateAmount" />
+          <EntitySet Name="CentralizedLockUps" EntityType="CentralizedModel.CentralizedLockUp" />
+          <EntitySet Name="Customer_URL" EntityType="CentralizedModel.Customer_URL" />
+          <EntitySet Name="StoreVsDistributors" EntityType="CentralizedModel.StoreVsDistributor" />
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Product_Id" Type="Decimal" Nullable="false" Precision="10" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serial_Num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Product_NameEn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OldBarcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pos_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Receipt_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Main_Grp_Id" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Sub_Grp_Id" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="UOM" Type="Int32" />
+          <Property Name="SubCategoryId" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="PiecesInCatron" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="CatronInBox" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="ModelID" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="ItemTypeID" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="ItemDirectCost" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="ShippingClassfication" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="ReplacementItemId" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="BasicClassification" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="AdvancedClassification" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="ItemOverHead" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="BrandId" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="HasReplacement" Type="Boolean" />
+          <Property Name="IsReplenishment" Type="Boolean" />
+          <Property Name="CategoryId" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Weight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Photo_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lead_Time" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Pdt_Type" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="Currency_Id" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="seasonId" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="FabricGroupId" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="FabricTypeId" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Year" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TreatmentType" Type="Int32" />
+          <Property Name="PrintName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Updated" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="Active" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Lastupdate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="updatedby" Type="Int32" />
+          <Property Name="Deletedby" Type="Int32" />
+          <Property Name="IsSupplierOffer" Type="Boolean" />
+          <Property Name="IsNegativeSales" Type="Boolean" />
+          <Property Name="IsWeight" Type="Boolean" />
+          <Property Name="BigUnitNameAr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BigUnitNameEn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductAttribute">
+          <Key>
+            <PropertyRef Name="Seq" />
+          </Key>
+          <Property Name="Seq" Type="Decimal" Nullable="false" Precision="10" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Decimal" Nullable="false" Precision="6" Scale="0" />
+          <Property Name="Color_Id" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="CompanyID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size_Id" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="MinimumstockQty" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ReplenishmentQty" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="BarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OldBarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MappingBarcode" Type="Decimal" Precision="1" Scale="0" />
+          <Property Name="Updated" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="Active" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Lastupdate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="updatedby" Type="Int32" />
+          <Property Name="Deletedby" Type="Int32" />
+          <Property Name="UOM" Type="Int32" />
+          <Property Name="ParentId" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="MinimumStockLimit" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MaximumStockLimit" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ReorderQty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MinOrderQty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MaxOrderQty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MainSupplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductVsDistributor">
+          <Key>
+            <PropertyRef Name="PartnerCode" />
+            <PropertyRef Name="ProductAttrBarcode" />
+          </Key>
+          <Property Name="PartnerCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="ProductAttrBarcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InternalCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductVsVendor">
+          <Key>
+            <PropertyRef Name="VendorCode" />
+            <PropertyRef Name="ProductAttrBarcode" />
+          </Key>
+          <Property Name="VendorCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="ProductAttrBarcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReturnPercentage" Type="Decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="DistributorVsVendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorCompanyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartnerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CustomerRebateAmount">
+          <Key>
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CompanyID" />
+            <PropertyRef Name="VendorCompanyCode" />
+          </Key>
+          <Property Name="StoreID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorCompanyCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OldRebateAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NewRebateAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CentralizedLockUp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NameAr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NameEn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Lastupdate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="updatedby" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CompanyID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Customer_URL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StoreName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StoreNameEng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyNameEng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="ProvinceID" Type="Int32" />
+          <Property Name="CityID" Type="Int32" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="TerritoryID" Type="Int32" />
+          <Property Name="VAT_Registration" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Commercial_Registration" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="LastSalesSyncDate" Type="DateTime" Precision="3" />
+          <Property Name="LastOpenDay" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="StoreVsDistributor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorCompanyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lastupdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="PartnerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CentralizedModelStoreContainer" CdmEntityContainer="CentralizedEntities">
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

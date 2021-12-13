@@ -1,0 +1,170 @@
+﻿@model  VendorSystem.ViewModel.CompanyVM
+@{
+    ViewBag.Title = VendorSystem.Resources.Resource.CompanySettings;
+    <link href="~/Content/ViewsStyle/PartnerIndex.css" rel="stylesheet" />
+
+}
+<div class=" breadcrumbs ace-save-state breadcrumbs-fixed" style="background-color:white;margin-top:13px;margin-left:3px;margin-right:3px">
+    <div class="panel-body">
+        <h2 style="color:#676767; display:inline-block"> <i class="glyphicon glyphicon-user"></i> @VendorSystem.Resources.Resource.CompanySettings</h2>
+        <div id="DivButton" style="display:inline-block;">
+            <button style="color:#F0BB41 !important;border-color:#F0BB41 !important;border-radius:5px" type="button" onclick="New()" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon glyphicon glyphicon-refresh "></i>
+                @VendorSystem.Resources.Resource.New
+            </button>
+            @if (Authentication.IsVisiable("Company Settings", TypeButton.Save, Session["RoleID"].ToString()))
+            {
+                <button style="color:#F0BB41 !important;border-color:#F0BB41 !important;border-radius:5px" type="button" onclick="CheckValidation()" class="btn btn-white btn-info btn-bold">
+                    <i class="glyphicon glyphicon-floppy-saved "></i>
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<br /><br /><br />
+<div class="panel">
+    <div class="panel-body">
+        <div class="col-lg-8 col-md-8 col-xs-12">
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CompanyId</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.Company_Id, new { @class = "form-control", @maxlength = "6", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(c => c.Company_Id)
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.CompanyName</label>
+                <span class="span">*</span>
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.Company_Name, new { @class = "form-control", @maxlength = "100" })
+                    @Html.ValidationMessageFor(c => c.Company_Name)
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Country</label>
+                <div class="input-group">
+                    @Html.DropDownList("ddCountry", ViewBag.Country as SelectList, VendorSystem.Resources.Resource.Select)
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Province</label>
+                <div class="input-group">
+                    <select id="ddProvince" ></select>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.City</label>
+                <div class="input-group">
+                    <select id="ddCity" ></select>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Region</label>
+                <div class="input-group">
+                    <select id="ddRegion" ></select>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Territory</label>
+                <div class="input-group">
+                    <select id="ddTerritory" ></select>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Address</label>
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.Company_Address, new { @class = "form-control", @maxlength = "70" })
+                </div>
+                @Html.ValidationMessageFor(c => c.Company_Address)
+            </div>
+
+           
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.WebSite</label>
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.Website, new { @class = "form-control", @maxlength = "40" })
+                </div>
+                @Html.ValidationMessageFor(c => c.Website)
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Mobile</label>
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", @maxlength = "15", @onkeypress = "return isNumberKey(event)" })
+                </div>
+                @Html.ValidationMessageFor(c => c.Mobile)
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <label class="control-label">@VendorSystem.Resources.Resource.Phone</label>
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.Phone1, new { @class = "form-control", @maxlength = "15", @onkeypress = "return isNumberKey(event)" })
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class=" breadcrumbs ace-save-state breadcrumbs-fixed col-lg-4 col-md-4 col-xs-12" style="margin-right:55%">*@
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <img width="90" height="300" id="ProductPhoto" />
+            </div>
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <label>Upload Photo</label>
+                <div class="input-group photo-container" id="PhotoDiv">
+                    <input type="file" id="ItemsFile" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@VendorSystem.Resources.Resource.SaveOperation</h4>
+            </div>
+            <div class="modal-body">
+                <h2>@VendorSystem.Resources.Resource.SaveQuestion</h2>
+            </div>
+            <div class="modal-footer">
+                <button name="action:Save" @*type="submit"*@ id="BtnSave" type="button" onclick="Save()" class="btn btn-success">
+                    @VendorSystem.Resources.Resource.Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModel">@VendorSystem.Resources.Resource.Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var Company = JSON.parse('@Html.Raw(Json.Encode(ViewBag.Company))');
+
+        function isNumberKey(event) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 44 || charCode > 57))
+                return false;
+            return true;
+        }
+    </script>
+
+    <script src="~/Scripts/ScriptsViews/GeographicalAreaJs.js"></script>
+    <script src="~/Scripts/ScriptsViews/CompanyJs.js?v2"></script>
+}
